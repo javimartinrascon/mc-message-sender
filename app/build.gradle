@@ -1,0 +1,64 @@
+import org.springframework.boot.gradle.run.BootRunTask
+
+buildscript {
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath "org.springframework.boot:spring-boot-gradle-plugin:$springBootVersion"
+	}
+}
+
+apply plugin: 'groovy'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+jar {
+    baseName = 'mc-messages-sender-app'
+    version = "$version"
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	compile "org.codehaus.groovy:groovy-all:$groovyVersion"
+	//testCompile 'org.unitils:unitils-core:3.3'
+
+	compile "org.springframework.boot:spring-boot-starter-web"
+    compile "org.springframework.boot:spring-boot-starter-amqp"
+    compile "org.codehaus.groovy.modules.http-builder:http-builder:$httpBuilderVersion"
+
+    testCompile "org.spockframework:spock-core:$spockVersion"
+    testRuntime 'cglib:cglib-nodep:3.2.4'
+    testRuntime 'org.objenesis:objenesis:2.4'
+
+    compile group: 'com.rabbitmq', name: 'amqp-client', version: '3.6.5'
+
+
+}
+
+tasks.withType(BootRunTask) {
+	systemProperties = System.properties
+}
+
+
+test {
+	testLogging {
+		events "passed", "skipped", "failed"
+		exceptionFormat "short"
+	}
+}
+
+idea {
+	module {
+		inheritOutputDirs = false
+		outputDir = file("$buildDir/classes/main/")
+		downloadJavadoc = false
+		downloadSources = true
+	}
+}

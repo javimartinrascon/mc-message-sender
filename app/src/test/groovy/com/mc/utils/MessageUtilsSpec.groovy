@@ -6,7 +6,7 @@ import spock.lang.Unroll
 class MessageUtilsSpec extends Specification {
 
     @Unroll
-    void "removes accents from a string"() {
+    void "transforms #text removing accents and giving #expected"() {
         expect:
             MessageUtils.cleanMessageText(text) == expected
 
