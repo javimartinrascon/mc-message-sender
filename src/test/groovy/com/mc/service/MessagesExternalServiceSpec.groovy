@@ -7,9 +7,14 @@ import groovyx.net.http.HttpResponseException
 import groovyx.net.http.RESTClient
 import org.slf4j.Logger
 import org.springframework.http.HttpStatus
+import spock.lang.Shared
 import spock.lang.Specification
 
+import javax.xml.ws.http.HTTPException
+
 class MessagesExternalServiceSpec extends Specification {
+
+    @Shared RESTClient restClient
 
     def "logs succesfully sent when success response"() {
         given:
@@ -17,9 +22,9 @@ class MessagesExternalServiceSpec extends Specification {
             HttpResponseDecorator resp = Mock() {
                 getStatus() >> 200
             }
-            RESTClient restClient = Mock() {
-                get(_) >> resp
-            }
+            restClient = Mock()
+
+
             Logger logMock = Mock()
             MessagesExternalService service = new MessagesExternalService(restClient: restClient)
             service.log = logMock
@@ -32,12 +37,13 @@ class MessagesExternalServiceSpec extends Specification {
             response == HttpStatus.OK
 
         and:
+            1 * restClient.get(_) >> resp
             1 * logMock.info("Successfully sent to external service")
     }
 
-    def "logs the error sent when no response"() {
+    def "logs the error sent when there is a wrong host"() {
         given:
-            RESTClient restClient = new RESTClient('http://host:8080')
+            restClient = new RESTClient('http://host:8080')
             Logger logMock = Mock()
             MessagesExternalService service = new MessagesExternalService(restClient: restClient)
             service.log = logMock

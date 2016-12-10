@@ -16,12 +16,6 @@ class MessagesExternalService {
 
     RESTClient restClient
 
-
-
-
-
-//    def httpBuilder
-
     def sendMessage(Message message) {
 
         def status
@@ -36,17 +30,5 @@ class MessagesExternalService {
         }
         status
     }
-//        HttpStatus response
-//        try {
-//            response = httpBuilder.get(path: "${message.msgType}",
-//                    query: [phone: message.phoneNumber, message: message.message],
-//                    contentType: ContentType.JSON)
-//            log.info("Successfully sent to external service")
-//        } catch (HttpResponseException e) {
-//            response = HttpStatus.valueOf(e.statusCode)
-//            log.error("Error sending message external service response: $e.statusCode")
-//        }
-//
-//        response
-//    }
+
 }

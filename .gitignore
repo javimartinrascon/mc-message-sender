@@ -1,0 +1,15 @@
+*.log.*
+*.log
+*.war
+*.rpm
+*.iml
+*.ipr
+*.iws
+build/
+.gradle/
+.DS_Store
+.gitignore
+*.idea/
+.idea/
+build/classes/main/application.properties
+build/classes/test/
