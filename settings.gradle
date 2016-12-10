@@ -1,3 +1,4 @@
-rootProject.name = 'mc-messages-sender-project'
+rootProject.name = 'mc-message-sender-project'
 
 include 'app'
+include 'test'
