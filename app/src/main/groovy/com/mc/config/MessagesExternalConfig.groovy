@@ -8,6 +8,4 @@ import org.springframework.stereotype.Component
 class MessagesExternalConfig {
     String host
     Integer port
-
-    String basePath
 }

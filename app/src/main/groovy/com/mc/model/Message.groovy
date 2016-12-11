@@ -1,14 +1,10 @@
 package com.mc.model
 
 import com.mc.utils.MessageUtils
-import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.core.env.Environment
 
 import java.util.regex.Pattern
 
 class Message {
-
-//    @Autowired Environment environment
 
     static final validTypes = ['sms', 'fax']
 
@@ -17,7 +13,7 @@ class Message {
     String msgType
 
     boolean isValid() {
-        if (!phoneNumber && !message && !msgType) return false
+        if (!phoneNumber || !message || !msgType) return false
         MessageUtils.cleanMessageText(message)
         validType && validPhoneNumber && validText
     }

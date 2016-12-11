@@ -1,0 +1,32 @@
+{
+  "name" : "EmbeddedBroker",
+  "defaultVirtualHost" : "default",
+  "modelVersion" : "6.0",
+  "authenticationproviders" : [ {
+    "name" : "passwordFile",
+    "type" : "PlainPasswordFile",
+    "secureOnlyMechanisms" : [],
+    "path" : "${qpid.passwordPath}"
+  } ],
+  "ports" : [  {
+    "name" : "AMQP",
+    "port" : "${qpid.port}",
+    "authenticationProvider" : "passwordFile",
+    "virtualhostaliases" : [ {
+      "name" : "nameAlias",
+      "type" : "nameAlias"
+    }, {
+      "name" : "defaultAlias",
+      "type" : "defaultAlias"
+    }, {
+      "name" : "hostnameAlias",
+      "type" : "hostnameAlias"
+    } ]
+  }],
+  "virtualhostnodes" : [ {
+    "name" : "default",
+    "type" : "JSON",
+    "defaultVirtualHostNode" : "true",
+    "virtualHostInitialConfiguration" : "${qpid.initial_config_virtualhost_config}"
+  } ]
+}

@@ -26,6 +26,16 @@ dependencies {
     testCompile group: 'org.springframework.amqp', name: 'spring-rabbit', version: '1.6.2.RELEASE'
 }
 
+
+configurations {
+    providedRuntime
+    all {
+        resolutionStrategy {
+            cacheDynamicVersionsFor 0, 'seconds'
+        }
+    }
+}
+
 test {
     testLogging {
         events "passed", "skipped", "failed"
